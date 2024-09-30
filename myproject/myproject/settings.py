@@ -139,4 +139,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TEST_RUNNER = 'myproject.test_runner.NoDbTestRunner'
+# TEST_RUNNER = 'myproject.test_runner.NoDbTestRunner'
