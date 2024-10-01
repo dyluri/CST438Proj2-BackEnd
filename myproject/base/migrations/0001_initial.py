@@ -23,4 +23,12 @@ class Migration(migrations.Migration):
                 'managed': False,
             },
         ),
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('user_id', models.AutoField(primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=16)),
+                ('password', models.CharField(max_length=128)),
+            ],
+        ),
     ]
