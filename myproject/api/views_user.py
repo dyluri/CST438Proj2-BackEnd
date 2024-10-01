@@ -9,7 +9,15 @@ def homePage(request):
                        '/login?username={username}&password={password}',
                        '/logout?username={username}',
                        '/logout?username={username}&password={password}',
-                       '/users']}
+                       '/users',
+                        '/lists',
+                        '/lists/list?list_id={list_id}',
+                        '/lists/items?user_id={user_id}',
+                        '/lists/addItem?user_id={user_id}&list_id={list_id}&item_id={item_id}',
+                        '/lists/deleteItem?user_id={user_id}&list_id={list_id}&item_id={item_id}',
+                        '/lists/add?user_id={user_id}&list_name={list_name}',
+                        '/lists/delete?user_id={user_id}&list_id={list_id}',
+                       ]}
     return Response(welcome)
 
 # TODO: Make this admin only

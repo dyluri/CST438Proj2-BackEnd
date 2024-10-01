@@ -111,7 +111,7 @@ def deleteList(request):
     try:
         list_instance = Lists.objects.get(list_id=list_id, user_id=user_id)
         list_instance.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)
     except Lists.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
