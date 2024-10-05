@@ -1,0 +1,14 @@
+FROM python:3
+
+ENV PYTHONBUFFERED 1
+
+RUN mkdir /new_app
+
+WORKDIR /new_app
+
+ADD . /new_app
+
+#Install dependencies
+RUN pip install -r requirements.txt
+
+CMD python manage.py runserver 0.0.0.0:$
