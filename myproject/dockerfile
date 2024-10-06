@@ -42,7 +42,4 @@ COPY requirements.txt /app/
 # Install project dependencies from requirements.txt
 RUN pip install -r requirements.txt
 
-# Expose the necessary port
-EXPOSE 8888
-
 CMD gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
