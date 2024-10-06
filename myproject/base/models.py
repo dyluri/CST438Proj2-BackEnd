@@ -21,4 +21,7 @@ class User(models.Model):
     signed_in = models.BooleanField(default=False)
     def __str__(self):
         return self.username
+    class Meta:
+        managed = False
+        db_table = 'users'
 
