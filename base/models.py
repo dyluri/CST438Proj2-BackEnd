@@ -6,11 +6,7 @@ class Lists(models.Model):
     user_id = models.IntegerField()
     list_id = models.AutoField(primary_key=True)
     list_name = models.CharField(max_length=32)
-    # TODO: this is temporary need to change in the future 
-    # to allow for an sql join from lists and item tables to get items in list
-    item_list = models.TextField(null=True, blank=True)
     class Meta:
-        managed = False
         db_table = 'lists'
 
 class User(models.Model):
@@ -22,6 +18,20 @@ class User(models.Model):
     def __str__(self):
         return self.username
     class Meta:
-        managed = False
         db_table = 'users'
 
+class Item(models.Model):
+    item_id = models.AutoField(primary_key=True)
+    list = models.ForeignKey(Lists, on_delete=models.CASCADE,null=True, blank=True)   # Foreign key to List
+
+    item_name = models.CharField(max_length=64)
+    date = models.DateField(auto_now_add=True)
+
+    item_url = models.TextField(null=True, blank=True)
+    image_url = models.TextField(null=True, blank=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    quantity = models.IntegerField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'items'

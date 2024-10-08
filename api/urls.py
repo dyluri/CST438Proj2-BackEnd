@@ -2,7 +2,7 @@
 from django.urls import path
 from . import views_list
 from . import views_user
-
+from . import views_item
 urlpatterns = [
     path('lists', views_list.getLists), # /lists
     path('lists/list', views_list.getListItems), # /lists/list?list_id={list_id}
@@ -19,4 +19,5 @@ urlpatterns = [
     path('newuser', views_user.createUser),
     path('login', views_user.logIn),
     path('logout', views_user.logout_or_delete_account),
+    path('debug', views_item.getItems)
 ]
