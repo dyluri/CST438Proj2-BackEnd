@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from base.models import User
 from .serializers import UserSerializer
+import bcrypt
 @api_view(['GET'])
 def homePage(request):
     welcome = {'hi': 'welcome to the django api thingy. To see the response for any of these in json, put into the link the following \'format=json\' ',
@@ -60,7 +61,7 @@ def logIn(request):
     # Check if the user with the given username exists
     try:
         user = User.objects.get(username=username)
-        if (password == user.password):
+        if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
             # Update the signed_in field to True
             user.signed_in = True
             user.save()
@@ -81,7 +82,7 @@ def adminLogIn(request):
     # Check if the user with the given username exists and is admin
     try:
         user = User.objects.get(username=username)
-        if (password == user.password):
+        if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
             #checking is user is an admin
             if(not user.is_admin):
                return Response({"error":"User is not admin"}, status=403)
