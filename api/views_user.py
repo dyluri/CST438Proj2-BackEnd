@@ -193,6 +193,7 @@ def updateUser(request):
                 return Response({"error": "Wrong Password"}, status=401)
             
         if bcrypt.checkpw(password.encode('utf-8'), og_password.encode('utf-8')):
+
             user.save();
         else:
             return Response({"error": "Wrong Password"}, status=401)
