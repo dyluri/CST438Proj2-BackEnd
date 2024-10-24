@@ -164,6 +164,7 @@ def updateUser(request):
     if admin_id:
         try:
             admin = User.objects.get(user_id=admin_id)
+            admin_og_password = admin.password
             if not admin.is_admin:
                 return Response({"error":f"{admin.username} is not admin","result":False}, status=404)
         except User.DoesNotExist:
@@ -172,6 +173,7 @@ def updateUser(request):
 
     try:
         user = User.objects.get(username=username)
+        og_password = user.password
     except User.DoesNotExist:
         return Response({"error":f"user {username} does not exist"}, status=404)
     
@@ -184,13 +186,13 @@ def updateUser(request):
         if new_password:
             user.password = new_password
         if admin_id:
-            if bcrypt.checkpw(password.encode('utf-8'), admin.password.encode('utf-8')):
+            if bcrypt.checkpw(password.encode('utf-8'), admin_og_password.encode('utf-8')):
                 user.save();
                 return Response({"success": "User updated successfully"}, status=200)
             else:
                 return Response({"error": "Wrong Password"}, status=401)
             
-        if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+        if bcrypt.checkpw(password.encode('utf-8'), og_password.encode('utf-8')):
             user.save();
         else:
             return Response({"error": "Wrong Password"}, status=401)
